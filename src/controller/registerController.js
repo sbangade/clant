@@ -88,22 +88,18 @@ export const getEmail = (req, res) => {
 
 export const addDriver = (req, res) => {
         let newDriver = new Pilot(req.body);
-        newDriver.save((err, driver) => {
-            if (err) {
-                res.send(err);
-            }
-            else{
-                res.json(driver);
-            }
-            
-            // Passenger.find({},(err, login) => {
-            //     if (err) {
-            //         res.send(err);
-            //     }
-            //     res.json(login);
-            // });
-            //  res.json(driver);
-        });
+  newDriver.save((err, driver) => {
+      if (err) {
+          res.send(err);
+      }
+      Passenger.find({},{"_id":0},(err, login) => {
+          if (err) {
+              res.send(err);
+          }
+          res.json(login);
+      });
+      //  res.json(driver);
+  });
     
     }
 
